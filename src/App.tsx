@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Sidebar from './components/Sidebar';
 import Debounce from './begins/01.debounce'
-import Throttle from './final/02.throttle'
+import Throttle from './begins/02.throttle'
 
 const routes = [
   { path: "/debounce", element: <Debounce /> },

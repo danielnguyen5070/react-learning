@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
+import { throttle } from "./utils";
 
 const BackToTop: React.FC = () => {
 	const [isVisible, setIsVisible] = useState(false);
@@ -7,11 +8,12 @@ const BackToTop: React.FC = () => {
 		console.log("Scroll event triggered");
 		setIsVisible(window.scrollY > 300);
 	}
+	const checkScroll = useMemo(() => throttle(handleScroll, 100), []);
 
 	useEffect(() => {
-		window.addEventListener("scroll", handleScroll);
-		return () => window.removeEventListener("scroll", handleScroll);
-	}, []);
+		window.addEventListener("scroll", checkScroll);
+		return () => window.removeEventListener("scroll", checkScroll);
+	}, [checkScroll]);
 
 	const scrollToTop = () => {
 		window.scrollTo({ top: 0, behavior: "smooth" });

@@ -24,3 +24,18 @@ export async function getSearchResult(search: string, delay?: number): Promise<A
     const dataFiltered = (await response.json()).results.filter((pokemon: Pokemon) => pokemon.name.includes(search));
     return dataFiltered as Promise<Array<Pokemon>>;
 }
+
+export function throttle<T extends (...args: Parameters<T>) => ReturnType<T>>(
+    func: T,
+    limit: number
+) {
+    let current = 0;
+    return (...args: Parameters<T>) => {
+        const now = Date.now();
+        if (now - current >= limit) {
+            console.log(`Throttling function call: ${current} -> ${now}`);
+            current = now;
+            func(...args);
+        }
+    }
+}

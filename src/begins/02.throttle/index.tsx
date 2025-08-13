@@ -1,47 +1,64 @@
-import { useState } from "react";
-import { getSearchResult, type Pokemon } from "./utils";
+import React, { useState, useEffect, useCallback } from "react";
 
-export default function App() {
-	const [search, setSearch] = useState("");
-	const [pokeData, setPokeData] = useState<Array<Pokemon>>([]);
+function throttle<T extends (...args: Parameters<T>) => void>(
+	func: T, delay: number) {
+	let lastCall = 0;
 
-	const fetchPokemon = async (value: string) => {
-		try {
-			const data = await getSearchResult(value);
-			setPokeData(data);
-		} catch (error) {
-			console.error("Error fetching Pokémon data:", error);
+	return function (this: unknown, ...args: Parameters<T>) {
+		const now = Date.now();
+		if (now - lastCall >= delay) {
+			lastCall = now;
+			func.apply(this, args);
 		}
 	};
+}
 
-	const handleInputChange = (value: string) => {
-		setSearch(value);
-		fetchPokemon(value);
+const BackToTop: React.FC = () => {
+	const [isVisible, setIsVisible] = useState(false);
+
+	const checkScroll = useCallback(
+		throttle(() => {
+			setIsVisible(window.scrollY > 300);
+		}, 200),
+		[]
+	);
+
+	useEffect(() => {
+		window.addEventListener("scroll", checkScroll);
+		return () => window.removeEventListener("scroll", checkScroll);
+	}, [checkScroll]);
+
+	const scrollToTop = () => {
+		window.scrollTo({ top: 0, behavior: "smooth" });
 	};
 
 	return (
-		<div className="min-h-screen py-8 px-4">
-			<input
-				type="text"
-				placeholder="Type something..."
-				className="border p-2 rounded w-full"
-				value={search}
-				onChange={(e) => handleInputChange(e.target.value)}
-			/>
-			{pokeData.length > 0 ? (
-				<ul className="mt-4 space-y-2">
-					{pokeData.map((pokemon) => (
-						<li key={pokemon.id} className="p-2 border rounded">
-							<div className="flex items-center space-x-2">
-								<span className="font-bold">{pokemon.name}</span>
-								<span className="text-gray-500">#{pokemon.id}</span>
-							</div>
-						</li>
-					))}
-				</ul>
-			) : (
-				<p className="mt-4 text-gray-500">No Pokémon found.</p>
+		<div className="relative">
+			<div style={{ height: "2500px", padding: "20px" }}>
+				<p>Scroll down to see the "Back to Top" button appear.</p>
+			</div>
+			{isVisible && (
+				<button
+					onClick={scrollToTop}
+					style={{
+						position: "fixed",
+						bottom: "20px",
+						right: "20px",
+						padding: "10px 15px",
+						fontSize: "16px",
+						cursor: "pointer",
+						borderRadius: "8px",
+						backgroundColor: "#333",
+						color: "#fff",
+						border: "none",
+					}}
+					className="bg-gray-800 text-white rounded shadow-lg hover:bg-gray-700 transition-colors duration-300"
+				>
+					↑ Back to Top
+				</button>
 			)}
 		</div>
 	);
-}
+};
+
+export default BackToTop;

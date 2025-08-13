@@ -1,20 +1,12 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Sidebar from './components/Sidebar';
-import ManagingUI from './exercises/01.managing-ui-state'
-import SideEffects from './exercises/02.side-effects'
-import LiftingState from './exercises/03.lifting-state'
-import Dom from './exercises/04.dom'
-import Id from './exercises/05.id'
-import TicTacTes from './exercises/06.tic-tac-toe'
+import Debounce from './begins/01.debounce'
+import Throttle from './final/02.throttle'
 
 const routes = [
-  { path: "/managing-ui-state", element: <ManagingUI /> },
-  { path: "/effect", element: <SideEffects /> },
-  { path: "/lifting-state", element: <LiftingState /> },
-  { path: "/dom-effect", element: <Dom /> },
-  { path: "/use-id", element: <Id /> },
-  { path: "/tictactos", element: <TicTacTes /> },
+  { path: "/debounce", element: <Debounce /> },
+  { path: "/throttle", element: <Throttle /> },
 ];
 
 function App() {

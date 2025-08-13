@@ -1,31 +1,14 @@
-import React from 'react';
 import { NavLink } from 'react-router-dom';
 
 // Array of menu items
 const menuItems = [
     {
-        label: 'Managing UI State',
-        path: '/managing-ui-state'
+        label: 'Debounce',
+        path: '/debounce'
     },
     {
-        label: 'Side-Effects',
-        path: '/effect'
-    },
-    {
-        label: 'Lifting State',
-        path: '/lifting-state'
-    },
-    {
-        label: 'DOM Side-Effects',
-        path: '/dom-effect'
-    },
-    {
-        label: 'Use Id',
-        path: '/use-id'
-    },
-    {
-        label: 'Tic Tac Toe',
-        path: '/tictactos'
+        label: 'Throttle',
+        path: '/throttle'
     },
 ];
 

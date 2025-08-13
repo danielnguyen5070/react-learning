@@ -3,10 +3,12 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Sidebar from './components/Sidebar';
 import Debounce from './begins/01.debounce'
 import Throttle from './begins/02.throttle'
+import Array from './begins/03.arrays';
 
 const routes = [
   { path: "/debounce", element: <Debounce /> },
   { path: "/throttle", element: <Throttle /> },
+  { path: "/array", element: <Array /> },
 ];
 
 function App() {

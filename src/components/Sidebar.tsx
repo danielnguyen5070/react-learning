@@ -10,6 +10,10 @@ const menuItems = [
         label: 'Throttle',
         path: '/throttle'
     },
+    {
+        label: 'Array',
+        path: '/array'
+    },
 ];
 
 const Sidebar = () => {

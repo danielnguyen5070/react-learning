@@ -14,6 +14,10 @@ const menuItems = [
         label: 'Array',
         path: '/array'
     },
+    {
+        label: 'Form',
+        path: '/form'
+    },
 ];
 
 const Sidebar = () => {

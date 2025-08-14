@@ -52,7 +52,7 @@ function App() {
 			<div>
 				<label className="block mb-2">Age</label>
 				<input
-					{...register("age")}
+					{...register("age", { valueAsNumber: true })}
 					type="number"
 					className="border p-2 w-full rounded border-gray-400"
 					placeholder="Enter your age"

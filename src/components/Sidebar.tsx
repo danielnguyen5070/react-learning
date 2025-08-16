@@ -15,6 +15,10 @@ const menuItems = [
         path: '/array'
     },
     {
+        label: 'React Window',
+        path: '/react-Window'
+    },
+    {
         label: 'Form',
         path: '/form'
     },
